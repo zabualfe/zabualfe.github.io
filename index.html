@@ -1,7 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zayd Abualfellat | Software Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://kit.fontawesome.com/c0a3403ffb.js" crossorigin="anonymous"></script>
+</head>
 <body>
-<h1>Hello World Test</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <nav>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Hi, I'm Zayd</h1>
+      <h2><span id="typewriter"></span></h2>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Education -->
+    <section id="education" class="fade-in">
+      <h2>Education</h2>
+      <ul class="card-grid">
+        <li class="card">
+          <h3>Michigan State University</h3>
+          <div class="subtitle">B.S. in Computer Science · Sep 2022 - May 2025</div>
+          <div class="tags">
+            <span class="tag">Dean's List</span>
+            <span class="tag">Pre-Law Cognate</span>
+          </div>
+          <div class="description-box">
+            <p><strong>Relevant Courses:</strong></p>
+            <div class="tags">
+              <span class="tag">Data Structures & Algorithms</span>
+              <span class="tag">Operating Systems</span>
+              <span class="tag">Database Systems</span>
+              <span class="tag">Computer Systems & Networking</span>
+              <span class="tag">Web Development</span>
+              <span class="tag">Software Engineering</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Calculus I, II, & III</span>
+              <span class="tag">Linear Algebra</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="fade-in">
+      <h2>Experience</h2>
+      <ul class="card-grid"></ul>
+    </section>
+
+
+    <!-- Projects -->
+    <section id="projects" class="fade-in">
+      <h2>Projects</h2>
+      <ul class="card-grid"></ul>
+    </section>
+
+    <!-- Talks -->
+    <section id="talks" class="fade-in">
+      <h2>Talks</h2>
+      <ul class="card-grid" id="talksContainer"></ul>
+    </section>
+
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <div class="modal-header">
+          <div class="modal-icon" id="modalIcon"></div>
+          <div>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalSubtitle">Subtitle</p>
+            <div id="modalTech" class="tech-tags" style="margin-top: 0.75rem;"></div>
+          </div>
+        </div>
+
+        <div id="modalGallery" class="modal-section" style="display: none;">
+          <h3>Screenshots</h3>
+          <div id="modalImages" class="image-gallery"></div>
+        </div>
+
+        <div id="modalLinks" class="modal-section" style="display: none;">
+          <h3>Links</h3>
+          <a href="#" id="modalLink" class="modal-link" target="_blank">
+            <i class="fas fa-play-circle"></i>
+          </a>
+        </div>
+
+        <div id="modalSTAR" class="modal-section"></div>
+      </div>
+    </div>
+
+    <div id="lightboxOverlay" class="lightbox-overlay" style="display: none; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.9); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;">
+      <span id="closeLightbox" class="close-button" style="top: 1rem; right: 2rem; position: absolute; cursor: pointer; font-size: 2rem; z-index: 1002;">&times;</span>
+      <button id="lightboxPrev" class="lightbox-nav" style="position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; color: #1db954; background: none; border: none; cursor: pointer;">&#10094;</button>
+      <img id="lightboxImage" src="" alt="Enlarged screenshot" class="lightbox-img" style="max-width: 90%; max-height: 90%; border-radius: 0.5rem; box-shadow: 0 0 1rem rgba(0,0,0,0.6); transform: scale(0.95); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;" />
+      <button id="lightboxNext" class="lightbox-nav" style="position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; color: #1db954; background: none; border: none; cursor: pointer;">&#10095;</button>
+    </div>
+
+
+    <!-- Contact -->
+    <ul class="card-grid contact-grid" id="contact">
+      <li><a href="mailto:zabualfe@gmail.com" class="card contact-icon-button" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i><span>Email</span></a></li>
+      <li><a href="https://www.linkedin.com/in/zabualfe/" class="card contact-icon-button" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a></li>
+      <li><a href="https://github.com/zabualfe" class="card contact-icon-button" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i><span>GitHub</span></a></li>
+      <li><a href="/Zayd_Abualfellat_Resume.pdf" class="card contact-icon-button" target="_blank" aria-label="Resume"><i class="fas fa-file-alt"></i><span>Resume</span></a></li>
+    </ul>
+  </div>
+
+  <footer>
+    &copy; 2025 Zayd Abualfellat. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="experiences.js"></script>
+  <script src="projects.js"></script>
+  <script src="project-info.js"></script>
+  <script src="talks.js"></script>
 </body>
 </html>
