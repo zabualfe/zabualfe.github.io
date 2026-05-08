@@ -3,129 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050512" />
+  <meta name="color-scheme" content="dark" />
   <title>Zayd Abualfellat | Software Engineer Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <script src="https://kit.fontawesome.com/c0a3403ffb.js" crossorigin="anonymous"></script>
   <link rel="icon" type="image/svg+xml" href="project-assets/favicon.svg">
 </head>
 <body>
-  <nav>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <dialog
+    id="welcomeOverlay"
+    class="welcome-overlay"
+    aria-labelledby="welcomeTitle"
+    aria-describedby="welcomeSubtitle"
+  >
+    <form method="dialog" class="welcome-overlay__inner">
+      <h1 id="welcomeTitle" class="welcome-overlay__title">
+        <span class="welcome-overlay__greeting">
+          <span class="welcome-overlay__hi">Hi,</span>
+          <span class="welcome-overlay__im">I'm</span>
+        </span>
+        <span class="welcome-overlay__name">Zayd</span>
+      </h1>
+      <p id="welcomeSubtitle" class="welcome-overlay__subtitle">Welcome to my Portfolio</p>
+      <button type="submit" class="welcome-overlay__cta" id="welcomeDismiss" autofocus>Continue</button>
+    </form>
+  </dialog>
 
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Hi, I'm Zayd</h1>
-      <h2><span id="typewriter"></span></h2>
-    </div>
-  </header>
-
-  <div class="container">
-    <!-- Education -->
-    <section id="education" class="fade-in">
-      <h2>Education</h2>
-      <ul class="card-grid">
-        <li class="card">
-          <h3>Michigan State University</h3>
-          <div class="subtitle">B.S. in Computer Science · Sep 2022 - May 2025</div>
-          <div class="tags">
-            <span class="tag">Dean's List</span>
-            <span class="tag">Pre-Law Cognate</span>
-          </div>
-          <div class="description-box">
-            <p><strong>Relevant Courses:</strong></p>
-            <div class="tags">
-              <span class="tag">Data Structures & Algorithms</span>
-              <span class="tag">Operating Systems</span>
-              <span class="tag">Database Systems</span>
-              <span class="tag">Computer Systems & Networking</span>
-              <span class="tag">Web Development</span>
-              <span class="tag">Software Engineering</span>
-              <span class="tag">Machine Learning</span>
-              <span class="tag">Calculus I, II, & III</span>
-              <span class="tag">Linear Algebra</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" class="fade-in">
-      <h2>Experience</h2>
-      <ul class="card-grid"></ul>
-    </section>
-
-
-    <!-- Projects -->
-    <section id="projects" class="fade-in">
-      <h2>Projects</h2>
-      <ul class="card-grid"></ul>
-    </section>
-
-    <!-- Talks -->
-    <section id="talks" class="fade-in">
-      <h2>Talks</h2>
-      <ul class="card-grid" id="talksContainer"></ul>
-    </section>
-
-
-    <!-- Modal -->
-    <div id="projectModal" class="modal">
-      <div class="modal-content">
-        <span class="close-button" id="closeModal">&times;</span>
-        <div class="modal-header">
-          <div class="modal-icon" id="modalIcon"></div>
-          <div>
-            <h2 id="modalTitle">Title</h2>
-            <p id="modalSubtitle">Subtitle</p>
-            <div id="modalTech" class="tech-tags" style="margin-top: 0.75rem;"></div>
-          </div>
-        </div>
-
-        <div id="modalGallery" class="modal-section" style="display: none;">
-          <h3>Screenshots</h3>
-          <div id="modalImages" class="image-gallery"></div>
-        </div>
-
-        <div id="modalLinks" class="modal-section" style="display: none;">
-          <h3>Links</h3>
-          <a href="#" id="modalLink" class="modal-link" target="_blank">
-            <i class="fas fa-play-circle"></i>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Site">
+      <div class="sidebar-card">
+        <div class="profile-card">
+          <a class="profile-card__cover" href="https://www.linkedin.com/in/zabualfe/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile">
+            <img class="profile-card__cover-img" src="project-assets/linkedin-banner.jpg" alt="" width="320" height="128" loading="eager" decoding="async" />
+            <span class="profile-card__cover-fallback" aria-hidden="true"></span>
           </a>
+          <div class="profile-card__body">
+            <a href="https://www.linkedin.com/in/zabualfe/" target="_blank" rel="noopener noreferrer" class="profile-card__avatar-wrap" aria-label="LinkedIn — profile photo">
+              <img id="profile-avatar" class="profile-card__avatar" src="https://github.com/zabualfe.png" alt="Zayd Abualfellat" width="96" height="96" loading="eager" decoding="async" />
+            </a>
+            <h1 class="profile-card__name">Zayd Abualfellat</h1>
+            <p class="profile-card__tagline"><span id="typewriter"></span></p>
+          </div>
+        </div>
+        <nav class="sidebar-nav" role="tablist" aria-label="Primary">
+          <a id="tab-experience" href="#experience" role="tab" aria-controls="experience" aria-selected="true">Experience</a>
+          <a id="tab-education" href="#education" role="tab" aria-controls="education" aria-selected="false">Education</a>
+          <a id="tab-projects" href="#projects" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
+          <a id="tab-talks" href="#talks" role="tab" aria-controls="talks" aria-selected="false">Talks</a>
+        </nav>
+        <div class="sidebar-contact" aria-label="Contact">
+          <a href="mailto:zabualfe@gmail.com" class="sidebar-contact__link" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/zabualfe/" class="sidebar-contact__link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/zabualfe" class="sidebar-contact__link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="/Resume.pdf" class="sidebar-contact__link" target="_blank" rel="noopener noreferrer" aria-label="Resume"><i class="fas fa-file-alt"></i></a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="layout-main">
+      <div class="main-card">
+        <div class="container">
+          <div class="tab-panels">
+            <!-- Experience -->
+            <section id="experience" class="tab-panel" role="tabpanel" aria-labelledby="tab-experience">
+              <h2>Experience</h2>
+              <ul class="experience-timeline" id="experienceTimeline" aria-label="Work experience"></ul>
+              <div id="certificationsSection" class="certifications-section" aria-label="Certifications"></div>
+              <div id="skillsSection" class="skills-section" aria-label="Technical skills"></div>
+            </section>
+
+            <!-- Education -->
+            <section id="education" class="tab-panel" role="tabpanel" aria-labelledby="tab-education" hidden>
+              <h2>Education</h2>
+              <ul class="education-list" id="educationList" aria-label="Education"></ul>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="tab-panel" role="tabpanel" aria-labelledby="tab-projects" hidden>
+              <h2>Projects</h2>
+              <ul class="experience-timeline" id="projectsTimeline" aria-label="Projects"></ul>
+            </section>
+
+            <!-- Talks -->
+            <section id="talks" class="tab-panel" role="tabpanel" aria-labelledby="tab-talks" hidden>
+              <h2>Talks</h2>
+              <ul class="card-grid" id="talksContainer"></ul>
+            </section>
+          </div>
+
+        <div id="lightboxOverlay" class="lightbox-overlay" style="display: none; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; align-items: center; justify-content: center; background-color: rgba(5, 5, 24, 0.92); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;">
+          <span id="closeLightbox" class="close-button" style="top: 1rem; right: 2rem; position: absolute; cursor: pointer; font-size: 2rem; z-index: 1002;">&times;</span>
+          <button id="lightboxPrev" class="lightbox-nav" style="position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; background: none; border: none; cursor: pointer;">&#10094;</button>
+          <img id="lightboxImage" src="" alt="Enlarged screenshot" class="lightbox-img" style="max-width: 90%; max-height: 90%; border-radius: 0.5rem; box-shadow: 0 0 1rem rgba(0,0,0,0.6); transform: scale(0.95); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;" />
+          <button id="lightboxNext" class="lightbox-nav" style="position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; background: none; border: none; cursor: pointer;">&#10095;</button>
+        </div>
         </div>
 
-        <div id="modalSTAR" class="modal-section"></div>
+        <footer>
+          &copy; 2026 Zayd Abualfellat. All rights reserved.
+        </footer>
       </div>
     </div>
-
-    <div id="lightboxOverlay" class="lightbox-overlay" style="display: none; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.9); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;">
-      <span id="closeLightbox" class="close-button" style="top: 1rem; right: 2rem; position: absolute; cursor: pointer; font-size: 2rem; z-index: 1002;">&times;</span>
-      <button id="lightboxPrev" class="lightbox-nav" style="position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; color: #1db954; background: none; border: none; cursor: pointer;">&#10094;</button>
-      <img id="lightboxImage" src="" alt="Enlarged screenshot" class="lightbox-img" style="max-width: 90%; max-height: 90%; border-radius: 0.5rem; box-shadow: 0 0 1rem rgba(0,0,0,0.6); transform: scale(0.95); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;" />
-      <button id="lightboxNext" class="lightbox-nav" style="position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 1002; font-size: 2rem; color: #1db954; background: none; border: none; cursor: pointer;">&#10095;</button>
-    </div>
-
-
-    <!-- Contact -->
-    <ul class="card-grid contact-grid" id="contact">
-      <li><a href="mailto:zabualfe@gmail.com" class="card contact-icon-button" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i><span>Email</span></a></li>
-      <li><a href="https://www.linkedin.com/in/zabualfe/" class="card contact-icon-button" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a></li>
-      <li><a href="https://github.com/zabualfe" class="card contact-icon-button" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i><span>GitHub</span></a></li>
-      <li><a href="/Resume.pdf" class="card contact-icon-button" target="_blank" aria-label="Resume"><i class="fas fa-file-alt"></i><span>Resume</span></a></li>
-    </ul>
   </div>
-
-  <footer>
-    &copy; 2025 Zayd Abualfellat. All rights reserved.
-  </footer>
 
   <script src="script.js"></script>
   <script src="experiences.js"></script>
+  <script src="education.js"></script>
+  <script src="certifications.js"></script>
+  <script src="skills.js"></script>
   <script src="projects.js"></script>
   <script src="project-info.js"></script>
   <script src="talks.js"></script>
