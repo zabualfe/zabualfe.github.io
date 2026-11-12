@@ -460,11 +460,25 @@ body.search-open .shell::after {
 .noscript { padding: 24px; }
 
 /* ==========================================================================
-   Narrower desktop: the Now panel becomes a sheet
+   Smaller desktop: narrower side columns
    ========================================================================== */
 
 @media (max-width: 1240px) {
-  :root { --side: 300px; }
+  :root { --side: 280px; }
+  .actions { gap: 2px; }
+  .quick { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards:not(.cards--all) > :nth-child(4) { display: none; }
+  .cards--all { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .talks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .detail__body { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ==========================================================================
+   Narrow desktop: the Now panel becomes a slide-over
+   ========================================================================== */
+
+@media (max-width: 1024px) {
   .shell { grid-template-columns: var(--side) minmax(0, 1fr); }
   .topbar { grid-template-columns: var(--side) minmax(0, 1fr) auto; }
   .now {
@@ -477,10 +491,7 @@ body.search-open .shell::after {
   }
   body.now-open .now { transform: none; visibility: visible; transition: transform 0.3s var(--ease); }
   .now__close { display: grid; }
-  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .cards:not(.cards--all) > :nth-child(4) { display: none; }
-  .cards--all { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .player { grid-template-columns: minmax(0, 300px) minmax(0, 1fr) auto; }
+  .player { grid-template-columns: minmax(0, 280px) minmax(0, 1fr) auto; }
 }
 
 /* ==========================================================================

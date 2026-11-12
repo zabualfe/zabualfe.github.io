@@ -6,7 +6,7 @@
   const P = PORTFOLIO;
   const $ = (sel, root = document) => root.querySelector(sel);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-  const compactNow = window.matchMedia("(max-width: 1240px)");
+  const compactNow = window.matchMedia("(max-width: 1024px)");
   const mobile = window.matchMedia("(max-width: 860px)");
 
   // ---------- Data model ----------
