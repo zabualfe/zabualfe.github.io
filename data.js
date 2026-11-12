@@ -16,7 +16,14 @@ const PORTFOLIO = {
     tagline: "Software engineer at Capital One. I build backend systems and search that understands code.",
     about:
       "Michigan State CS grad and AWS Certified Solutions Architect. I build backend systems, cloud pipelines and search that understands code, and I’m starting an M.S. in Computer Science at Georgia Tech in 2027.",
-    avatar: "https://github.com/zabualfe.png",
+    avatar: "https://github.com/zabualfe.png?size=460",
+    // Shown in the About me panel (the right column on first visit)
+    facts: [
+      "AWS Certified Solutions Architect – Associate",
+      "Raised semantic search relevance from 55% to 85% on the Amazon capstone",
+      "Mentored 500+ students in C++ at Michigan State",
+      "Spoke at RDC24 on accessible game design",
+    ],
     email: "zabualfe@gmail.com",
     linkedin: "https://www.linkedin.com/in/zabualfe/",
     github: "https://github.com/zabualfe",

@@ -28,10 +28,10 @@
 
   // Chronological timeline the player steps through
   const timeline = [...items.values()].filter((it) => it.kind === "experience" || it.kind === "education").sort((a, b) => ym(a.start) - ym(b.start));
-  const currentRole = P.experience.find(isCurrent) || P.experience[0];
+  const currentRole = items.get((P.experience.find(isCurrent) || P.experience[0]).id);
 
   const state = {
-    selected: currentRole.id, // the item in the Now panel and player
+    selected: "about", // the item in the Now panel: "about" (default) or an item id
     view: { name: "home", filter: "all" }, // or { name: "project" | "talk", id }
     tab: "home",
     open: { experience: true, education: true, projects: false, talks: false },
@@ -50,6 +50,8 @@
     shuffle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22M18 2l4 4-4 4M2 6h1.9c1.5 0 2.9.9 3.6 2.2M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8M18 14l4 4-4 4"/></svg>',
     repeat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v1a4 4 0 0 1-4 4H3"/></svg>',
     mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+    file: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
+    linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5zM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1M7.1 20.5H3.6V9h3.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0"/></svg>',
     ext: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>',
     github: '<svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2"/></svg>',
   };
@@ -256,7 +258,36 @@
     return prevSame ? ["Previously", prevSame] : null;
   }
 
+  function renderAbout() {
+    const p = P.person;
+    const next = [...P.education].map((x) => items.get(x.id)).find(isFuture);
+    const now = $("#now");
+    now.style.setProperty("--sheet-tint", "rgba(196,181,253,0.32)");
+    now.innerHTML = `
+      <span class="now__grab" aria-hidden="true"></span>
+      <div class="now__head">
+        <button type="button" class="icon-btn now__close" data-close-now aria-label="Close details">${icons.chevDown}</button>
+        <h2>About me</h2>
+      </div>
+      <div class="about">
+        <img class="about__avatar" src="${esc(p.avatar)}" alt="${esc(p.name)}" width="112" height="112" />
+        <h3 class="now__title">${esc(p.name)}</h3>
+        <p class="now__meta">${esc(p.role)} at ${esc(p.company)}</p>
+        <p class="now__summary">${esc(p.about)}</p>
+        <div class="about__links">
+          <a class="pill pill--accent" href="mailto:${esc(p.email)}">${icons.mail} Email me</a>
+          <a class="icon-btn icon-btn--ring" href="${esc(p.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${icons.linkedin}</a>
+          <a class="icon-btn icon-btn--ring" href="${esc(p.github)}" target="_blank" rel="noopener" aria-label="GitHub">${icons.github}</a>
+          <a class="icon-btn icon-btn--ring" href="${esc(p.resume)}" target="_blank" rel="noopener" aria-label="Résumé">${icons.file}</a>
+        </div>
+      </div>
+      <div class="now-card"><h3>Currently</h3>${row(currentRole).replace('aria-current="true"', "")}</div>
+      ${next ? `<div class="now-card"><h3>Next</h3>${row(next).replace('aria-current="true"', "")}</div>` : ""}
+      ${p.facts && p.facts.length ? `<div class="now-card"><h3>Quick facts</h3><ol class="numbered">${p.facts.map((f, i) => `<li data-n="${String(i + 1).padStart(2, "0")}">${esc(f)}</li>`).join("")}</ol></div>` : ""}`;
+  }
+
   function renderNow() {
+    if (!items.has(state.selected)) return renderAbout();
     const it = items.get(state.selected);
     const p = P.person;
     let head, status, art, title, meta, body = "";
@@ -302,7 +333,7 @@
   // ---------- Player ----------
   function playerItem() {
     const it = items.get(state.selected);
-    return it.kind === "experience" || it.kind === "education" ? it : currentRole;
+    return it && (it.kind === "experience" || it.kind === "education") ? it : currentRole;
   }
   function progressOf(it) {
     const s = ym(it.start), e = it.end ? ym(it.end) : today;
@@ -485,6 +516,15 @@
 
   // Opens any item: roles, schools and certs go to the Now panel; projects and talks open in the feed.
   function open(id, { user = false, push = true } = {}) {
+    if (id === "about") {
+      if (user) stopTour();
+      state.selected = "about";
+      renderAll();
+      $("#now").scrollTop = 0;
+      if (user) openSheet();
+      if (push && location.hash.slice(1) !== id) history.pushState(null, "", "#about");
+      return;
+    }
     const it = items.get(id);
     if (!it) return;
     if (user) stopTour();
@@ -507,6 +547,7 @@
 
   function goHome({ push = true } = {}) {
     state.view = { name: "home", filter: state.view.filter || "all" };
+    state.selected = "about";
     setTab("home");
     closeSheet();
     renderAll();
@@ -540,7 +581,7 @@
   function applyHash() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (!id) return goHome({ push: false });
-    if (items.has(id)) open(id, { push: false });
+    if (items.has(id) || id === "about") open(id, { push: false });
   }
 
   // ---------- Events ----------
@@ -598,5 +639,5 @@
   // ---------- Start ----------
   renderAll();
   const initial = decodeURIComponent(location.hash.slice(1));
-  if (initial && items.has(initial)) open(initial, { push: false });
+  if (initial && (items.has(initial) || initial === "about")) open(initial, { push: false });
 })();

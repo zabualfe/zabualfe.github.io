@@ -86,8 +86,8 @@ body {
 img, video, iframe { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-h1, h2, h3, h4, p, ul, figure { margin: 0; }
-ul { padding: 0; list-style: none; }
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
 svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 svg.fill { fill: currentColor; stroke: none; }
 
@@ -403,6 +403,12 @@ body.search-open .shell::after {
 .now__title { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
 .now__meta { font-size: 14px; color: var(--text-dim); margin-top: 2px; }
 .now__summary { color: var(--text-muted); font-size: 14px; margin-top: 12px; }
+.about { display: grid; justify-items: start; padding: 4px 0 6px; }
+.about__avatar { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background: var(--surface-open); box-shadow: 0 0 0 3px var(--bg-void), 0 0 0 5px rgba(142, 197, 255, 0.7); }
+.about__links { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+.about__links .pill svg { width: 16px; height: 16px; stroke-width: 2; }
+.icon-btn--ring { border: 1px solid var(--line-soft); }
+.now-card .numbered li { font-size: 14px; }
 .now-card { margin-top: 14px; padding: 16px; border-radius: 10px; background: rgba(34, 34, 62, 0.7); }
 .now-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
 .now-card p { color: var(--text-muted); font-size: 14px; }
